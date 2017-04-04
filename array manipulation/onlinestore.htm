@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+<head>
+  <title ng-controller="TitleCtrl">{{title}}</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="bootstrap.min.css">
+  <script src="jquery-2.2.2.min.js"></script>
+  <script src="bootstrap.min.js"></script>
+  <script src="angular.min.js"></script>
+  <script src="mod.js"></script>
+  <script src="product-ctrl.js"></script>
+  <script src="file.js"></script>
+  
+  <style>
+    /* Remove the navbar's default rounded borders and increase the bottom margin */ 
+    .navbar {
+      margin-bottom: 50px;
+      border-radius: 0;
+    }
+    
+    /* Remove the jumbotron's default bottom margin */ 
+     .jumbotron {
+      margin-bottom: 0;
+    }
+   
+    /* Add a gray background color and some padding to the footer */
+    footer {
+	  background-color: #f2f2f2;
+      padding: 25px;
+    }
+  </style>
+</head>
+<body>
+
+<div class="jumbotron">
+  <div class="container text-left">
+    <my-image size="icon" class="navbar-brand"></my-image><h1 style="font-family: 'Roboto Slab', serif;color: cornflowerblue">SlipKart</h1>
+    <small style="text-align: right">Where slip ur purse</small>
+  </div>
+</div>
+
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="#">Logo</a>
+
+    </div>
+    <div class="" id="myNavbar">
+      <ul class="nav navbar-nav">
+        <li class="active"><a href="#">Home</a></li>
+        <li><a href="#">Products</a></li>
+        <li><a href="#">Deals</a></li>
+        <li><a href="#">Stores</a></li>
+        <li><a href="#">Contact</a></li>
+      </ul>
+      <form class="nav navbar-nav navbar-left form-group">
+        <input type="search" class="form-control">
+      </form>
+      <button type="button" class="btn btn-default">Search</button>
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="login.html"><span class="glyphicon glyphicon-user"></span> Login</a></li>
+        <li><a href="#"><span class="glyphicon glyphicon-shopping-cart"></span> Cart</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<div class="container" ng-controller="ProductController">
+  <div class="row">
+    <ul class="thumbnails list-unstyled">
+      <li class="col-md-3" ng-repeat="product in products">
+        <div class="thumbnail" style="padding: 0;">
+          <div style="padding: 4px;">
+            <img alt="300x200" style="width: 100%;" src="{{product.product_image}}">
+          </div>
+          <div class="caption">
+
+            <h2>{{product.product_name}}</h2>
+            <p>{{product.product_description}}</p>
+            <h3>{{product.product_price|currency:"&#8377;"}}</h3>
+            <button type="button" class="btn btn-primary btn-sm" ng-click="addToCart($index)" ng-disabled = "product.disable  ">Add to cart</button>
+          </div>
+        </div>
+      </li>
+      <li class="col-md-3">
+        <div class="thumbnail" style="padding: 0;">
+   <div style="padding: 4px">
+
+     </div>
+          <div class="caption">
+            <h2 class="text-info panel-heading panel-info"> Cart</h2>
+            <ul class="list-group list-unstyled">
+              <li ng-repeat="item in cart" class="  list-group-item-info">
+                {{item.product_name}} - {{item.product_price|currency:"&#8377;"}}<img src="{{item.product_image}}" width="50px"height="50px"><button type="button" class="btn btn-link" ng-click="removeItem($index)">X</button>
+              </li>
+            </ul>
+            <!--<h2 class="panel-footer">Total = {{getTotal()|currency:"&#8377;"}}</h2>-->
+            <h2 class="panel-footer">Total = {{getTotal()|currency:"&#8377;"}}</h2>
+        </div>
+            </div>
+     </li>
+    </ul>
+    </div>
+ </div>
+</div><br>  <br>
+<footer class="container-fluid text-center">
+  <p>Online Store Copyright</p>  
+  <form class="form-inline">Get deals:
+    <input type="email" class="form-control" size="50" placeholder="Email Address">
+    <button type="button" class="btn btn-danger">Sign Up</button>
+  </form>
+</footer>
+
+</body>
+</html>
